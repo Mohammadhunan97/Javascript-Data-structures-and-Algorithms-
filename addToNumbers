@@ -1,0 +1,61 @@
+/*
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ 
+Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 0 -> 8
+Explanation: 342 + 465 = 807.
+*/
+
+
+function addTwoNumbers(ll1, ll2){
+  const linkedListToStringInReverse = (ll) => {
+    let current_node = ll;
+    let returnStr = "";
+    while(current_node.next){
+      returnStr = current_node.val + returnStr;
+      current_node = current_node.next;
+    }
+    returnStr = current_node.val + returnStr;
+    return returnStr;
+  }
+  const num1 = Number(linkedListToStringInReverse(ll1));
+  const num2 = Number(linkedListToStringInReverse(ll2));
+  const sum = String(num1 + num2);
+  const arr = sum.split("");
+
+  const makeLLFromArrInReverse = (arr) => {
+    const linkedList = {
+      val: arr[arr.length -1],
+      next: null
+    }
+    const addToLinkedList = (item) => {
+      let current_node = linkedList;
+      
+      while(current_node.next){
+        current_node = current_node.next;
+      }
+      current_node.next = {
+        val: item,
+        next: null
+      }
+    }
+
+    for(let i = arr.length -2; i >= 0 ; i--){
+      const item = arr[i];
+      addToLinkedList(item);
+    }
+
+    return linkedList;
+  }
+
+  return makeLLFromArrInReverse(arr);
+
+}
